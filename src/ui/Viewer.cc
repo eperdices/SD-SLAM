@@ -104,7 +104,7 @@ void Viewer::Run() {
   pangolin::GlTexture textVideo(iw, ih,GL_RGB, false, 0,GL_RGB,GL_UNSIGNED_BYTE);
   pangolin::OpenGlMatrixSpec P = pangolin::ProjectionMatrixRDF_TopLeft(iw,ih,fx,fy,cx,cy,0.001,1000);
 
-  bool bFollow = true;
+  bool bFollow = false;
   bool bLocalizationMode = false;
 
   while (!pangolin::ShouldQuit()) {
@@ -126,7 +126,7 @@ void Viewer::Run() {
     }
 
     // Set camera position
-    mpMapDrawer->GetCurrentOpenGLCameraMatrix(Twc);
+    bool validTwc = mpMapDrawer->GetCurrentOpenGLCameraMatrix(Twc);
 
     if (menuFollowCamera && bFollow) {
       s_cam.Follow(Twc);
@@ -134,7 +134,8 @@ void Viewer::Run() {
       s_cam.SetModelViewMatrix(
         pangolin::ModelViewLookAt(Config::ViewpointX(), Config::ViewpointY(), Config::ViewpointZ(), 0, 0, 0, 0.0,-1.0, 0.0));
       s_cam.Follow(Twc);
-      bFollow = true;
+      if (validTwc)
+        bFollow = true;
     } else if (!menuFollowCamera && bFollow) {
       bFollow = false;
     }
@@ -145,7 +146,8 @@ void Viewer::Run() {
       d_cam.Activate(s_cam);
       glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-      mpMapDrawer->DrawCurrentCamera(Twc);
+      if (validTwc)
+        mpMapDrawer->DrawCurrentCamera(Twc);
       if (menuShowKeyFrames || menuShowGraph)
         mpMapDrawer->DrawKeyFrames(menuShowKeyFrames, menuShowGraph);
       if (menuShowPoints)
@@ -231,7 +233,7 @@ void Viewer::Run() {
       if(bLocalizationMode)
         mpSystem->DeactivateLocalizationMode();
       bLocalizationMode = false;
-      bFollow = true;
+      bFollow = false;
       mpSystem->Reset();
       menuReset = false;
     }

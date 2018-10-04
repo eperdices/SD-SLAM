@@ -209,7 +209,7 @@ void MapDrawer::SetCurrentCameraPose(const Eigen::Matrix4d &Tcw) {
   mCameraPose = Tcw;
 }
 
-void MapDrawer::GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M) {
+bool MapDrawer::GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M) {
   if (!mCameraPose.isZero()) {
     Eigen::Matrix3d Rwc;
     Eigen::Vector3d twc;
@@ -238,8 +238,11 @@ void MapDrawer::GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M) {
     M.m[13] = twc(1);
     M.m[14] = twc(2);
     M.m[15]  = 1.0;
-  } else
+    return true;
+  } else {
     M.SetIdentity();
+    return false;
+  }
 }
 
 }  // namespace SD_SLAM

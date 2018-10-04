@@ -131,7 +131,7 @@ class LoopClosing {
   // Fix scale in the stereo/RGB-D case
   bool mbFixScale;
 
-  bool mnFullBAIdx;
+  int mnFullBAIdx;
 
  public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW

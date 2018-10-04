@@ -128,6 +128,8 @@ Frame::Frame(const cv::Mat &imGray, ORBextractor* extractor, const Eigen::Matrix
   // Frame ID
   mnId=nNextId++;
 
+  mTcw.setZero();
+
   // Scale Level Info
   mnScaleLevels = mpORBextractorLeft->GetLevels();
   mfScaleFactor = mpORBextractorLeft->GetScaleFactor();

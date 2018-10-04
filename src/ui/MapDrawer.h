@@ -44,7 +44,7 @@ class MapDrawer {
   void DrawKeyFrames(const bool bDrawKF, const bool bDrawGraph);
   void DrawCurrentCamera(pangolin::OpenGlMatrix &Twc);
   void SetCurrentCameraPose(const Eigen::Matrix4d &Tcw);
-  void GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M);
+  bool GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M);
 
  private:
   Eigen::Matrix4d mCameraPose;

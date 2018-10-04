@@ -8,7 +8,7 @@ SD-SLAM is a real-time SLAM library for **Monocular** and **RGB-D** cameras that
 SD-SLAM is released under a [GPLv3 license](https://github.com/eperdices/SD-SLAM/blob/master/License-gpl.txt).
 
 # 2. Prerequisites
-We have tested the library in **Ubuntu 16.04**, but it should be easy to compile in other platforms.
+We have tested the library in **Ubuntu 16.04** and **Ubuntu 18.04**, but it should be easy to compile in other platforms.
 
 ## Pangolin
 We use [Pangolin](https://github.com/stevenlovegrove/Pangolin) for visualization and user interface. Dowload and install instructions can be found at: https://github.com/stevenlovegrove/Pangolin.
